@@ -1,0 +1,37 @@
+
+MODEL - VIEW - CONTROL
+
+Graphics engine:
+    - draw objects
+    - draw menu
+    - draw predicted paths of motion
+
+Physics engine:
+    - applying direct force to an object
+    - applying gravitational force
+    - calculating trajectory of a given body
+    - drag ?
+    - managing weak gravitational forces from far away planets
+    - collision detection
+    - fast forward
+
+Player interaction:
+    - interpret keyboard input
+    - interpret mouse input
+    - menu interactions
+
+
+
+TODOS - next tasks:
+- fix makefile
+- draw objects - triangle, circle, square
+- control objects
+- basic physics - gravity, velocity, acceleration, time - faster slower
+- phycisc - circular movement has to be cool
+- advanced physics - collisions
+- draw and controll more complex objects
+- physics vol.3 computing trajectory
+
+
+TODO - side quests, good ideas:
+- GSLwrapper
