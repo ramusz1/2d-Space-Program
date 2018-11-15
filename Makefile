@@ -1,13 +1,23 @@
-COMP = g++
-STANDARD = c++14
-INCLUDE = src/
-LIBS = -lGL -lGLEW -lglfw
+SRC_DIR := src
+OBJ_DIR := obj
+# SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+SRC_FILES := $(shell find $(SRC_DIR) -name '*.cpp')
+OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
+LDFLAGS := -lGL -lGLEW -lglfw
+#CPPFLAGS := ...
+#CXXFLAGS := ...
+CXX := g++
+PROGRAM := main.out
 
+all: $(PROGRAM)
+	./$(PROGRAM)
 
-all: compile run
+$(PROGRAM): $(OBJ_FILES)
+	$(CXX) -o $@ $^ $(LDFLAGS)
 
-run:
-	./a.out
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
-compile:
-	$(COMP) -I=$(INCLUDE) src/main.cpp src/Window.cpp src/UniverseView.cpp src/UniverseModel.cpp src/shaders/ShaderCompiler.cpp src/models/Drawable.cpp src/models/Triangle.cpp $(LIBS) --std=$(STANDARD)
+clean:
+	find $(OBJ_DIR) -name "*.o" -type f -delete
+	rm $(PROGRAM)
