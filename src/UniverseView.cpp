@@ -28,8 +28,7 @@ void UniverseView::render()
 
     for(auto& drawable : drawables)
     {
-        auto vertexBuffer = drawable.getVertexBuffer();
-        glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+        glBindBuffer(GL_ARRAY_BUFFER, drawable->getVertexBuffer());
         glVertexAttribPointer(
             0,                  // attribute
             3,                  // size
@@ -39,7 +38,7 @@ void UniverseView::render()
             (void*)0            // array buffer offset
         );
         glEnableVertexAttribArray(0);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(drawable->getMode(), 0, drawable->getVerticesCount());
     }
     window.swapBuffers();
 }

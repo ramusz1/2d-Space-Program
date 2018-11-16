@@ -1,13 +1,16 @@
 #pragma once
 
+#include <memory>
+
 #include "models/Drawable.hpp"
+
+using namespace std;
 
 class UniverseModel{
 private:
-    vector<Drawable> worldObjects;
+    vector< unique_ptr<Drawable> > worldObjects;
 
 public:
     UniverseModel();
-    const vector<Drawable>& getWorldObjects() const;
-    static vector<Drawable> test();    
+    const vector<unique_ptr<Drawable> >& getWorldObjects() const;
 };

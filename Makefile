@@ -9,7 +9,7 @@ LDFLAGS := -lGL -lGLEW -lglfw
 CXX := g++
 PROGRAM := main.out
 
-all: $(PROGRAM)
+all: clean $(PROGRAM)
 	./$(PROGRAM)
 
 $(PROGRAM): $(OBJ_FILES)
@@ -20,4 +20,4 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 
 clean:
 	find $(OBJ_DIR) -name "*.o" -type f -delete
-	rm $(PROGRAM)
+	rm -f $(PROGRAM)

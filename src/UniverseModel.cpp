@@ -1,14 +1,18 @@
+#include <iostream>
+
 #include "UniverseModel.hpp"
 #include "models/Triangle.hpp"
-#include <iostream>
+#include "models/Square.hpp"
+
+using namespace std;
 
 UniverseModel::UniverseModel()
 {
-    Triangle triangle(0.5);
-    worldObjects.push_back(move(triangle));
+    worldObjects.push_back(make_unique<Triangle>(0.5));
+    worldObjects.push_back(make_unique<Square>(0.5));
 }
 
-const vector<Drawable>& UniverseModel::getWorldObjects() const
+const vector< unique_ptr<Drawable> >& UniverseModel::getWorldObjects() const
 {
     return worldObjects;
 }

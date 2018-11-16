@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-class Triangle: public Drawable
+class Square: public Drawable
 {
 private:
     static const vector<float> baseVertices;
@@ -13,5 +13,5 @@ private:
     vector<float> vertices;
 
 public:
-    Triangle(float scale);
+    Square(float scale);
 };
