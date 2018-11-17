@@ -23,8 +23,7 @@ Player interaction:
 
 
 TODOS - next tasks:
-- fix makefile
-- draw objects - triangle, circle, square
+- draw objects - circle
 - control objects
 - basic physics - gravity, velocity, acceleration, time - faster slower
 - phycisc - circular movement has to be cool
@@ -35,3 +34,4 @@ TODOS - next tasks:
 
 TODO - side quests, good ideas:
 - GSLwrapper
+- inspect (remove?) usleep in main

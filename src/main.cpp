@@ -4,6 +4,7 @@
 #include "Window.hpp"
 #include "UniverseView.hpp"
 #include "UniverseModel.hpp"
+#include "UniverseController.hpp"
 
 int main(){
 
@@ -11,18 +12,18 @@ int main(){
         Window window;
         UniverseModel universeModel;
         UniverseView universeView(window, universeModel);
+        UniverseController universeController(universeModel);
+        window.setKeyCallback(&universeController);
 
-        while(window.isOpen())
+        while(window.isOpen() and universeController.isGameRunning())
         {
             universeView.render();
             usleep(10000);
+            window.pollEvents();
         }
     } catch(WindowException &e){
         std::cerr << e.what() << std::endl;
         return -1;
     }
-    /*
-    glfwSetKeyCallback(window, universeController.eventHandler)
-    */
     return 0;
 }

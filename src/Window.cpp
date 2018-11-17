@@ -1,11 +1,17 @@
 #include "Window.hpp"
 
-using namespace std;
-
 WindowException::WindowException(const char* msg) : message(msg){}
 
 const char* WindowException::what() const noexcept{
     return message;
+}
+
+bool Window::isOpen(){
+    return glfwWindowShouldClose(window) == 0;
+}
+
+void Window::pollEvents(){
+    glfwPollEvents();
 }
 
 void Window::swapBuffers() const
@@ -13,9 +19,14 @@ void Window::swapBuffers() const
     glfwSwapBuffers(window);
 }
 
-bool Window::isOpen(){
-    glfwPollEvents();
-    return glfwWindowShouldClose(window) == 0;
+void Window::setKeyCallback(WindowEventHandler* eventHandler)
+{
+    glfwSetWindowUserPointer(window, eventHandler);
+    auto eventHandlerWrapper = [](GLFWwindow* w, int key, int scancode, int action, int mods)
+    {
+        static_cast<WindowEventHandler*>(glfwGetWindowUserPointer(w))->eventHandler(key, scancode, action, mods);
+    };
+    glfwSetKeyCallback(window, eventHandlerWrapper);
 }
 
 Window::Window(){

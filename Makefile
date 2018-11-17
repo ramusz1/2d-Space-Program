@@ -5,11 +5,11 @@ SRC_FILES := $(shell find $(SRC_DIR) -name '*.cpp')
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 LDFLAGS := -lGL -lGLEW -lglfw
 #CPPFLAGS := ...
-#CXXFLAGS := ...
+CXXFLAGS := --std=c++17
 CXX := g++
 PROGRAM := main.out
 
-all: clean $(PROGRAM)
+all: $(PROGRAM)
 	./$(PROGRAM)
 
 $(PROGRAM): $(OBJ_FILES)

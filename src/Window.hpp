@@ -3,14 +3,15 @@
 #include <GLFW/glfw3.h>
 #include <memory>
 #include <exception>
+#include <functional>
 
-using namespace std;
+#include "WindowEventHandler.hpp"
 
-class WindowException : public exception
+class WindowException : public std::exception
 {
 public:
     WindowException(const char* msg);
-    const char* what() const noexcept;
+    const char* what() const noexcept override;
 private:
     const char* message;
 };
@@ -18,9 +19,13 @@ private:
 class Window
 {
 public:
-    bool isOpen();
-    void swapBuffers() const;
     Window();
+
+    bool isOpen();
+    void pollEvents();
+    void swapBuffers() const;
+    void setKeyCallback(WindowEventHandler* eventHandler);
+    
     ~Window();
 private :
     GLFWwindow* window;
