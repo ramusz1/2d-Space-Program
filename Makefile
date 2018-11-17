@@ -4,10 +4,13 @@ OBJ_DIR := obj
 SRC_FILES := $(shell find $(SRC_DIR) -name '*.cpp')
 OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 LDFLAGS := -lGL -lGLEW -lglfw
-#CPPFLAGS := ...
+INCLUDE_PATHS := -Isrc/
+CPPFLAGS := $(INCLUDE_PATHS)
 CXXFLAGS := --std=c++17
 CXX := g++
 PROGRAM := main.out
+
+TMP_FILE := /tmp/2d-kerbals-make-temp-file
 
 all: $(PROGRAM)
 	./$(PROGRAM)
@@ -21,3 +24,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 clean:
 	find $(OBJ_DIR) -name "*.o" -type f -delete
 	rm -f $(PROGRAM)
+
+recreate_obj_structure:
+	rm -rdf $(OBJ_DIR)
+	mkdir $(OBJ_DIR)
+	cd $(SRC_DIR) && find . -type d > $(TMP_FILE)
+	cd $(OBJ_DIR) && xargs mkdir -p < $(TMP_FILE)
+	rm $(TMP_FILE)

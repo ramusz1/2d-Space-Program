@@ -1,5 +1,5 @@
 #pragma once
-#include "Window.hpp"
+#include "window/Window.hpp"
 #include "UniverseModel.hpp"
 
 class UniverseView

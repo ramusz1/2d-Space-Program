@@ -1,10 +1,10 @@
 #include <iostream>
 #include <unistd.h> // usleep 
 
-#include "Window.hpp"
-#include "UniverseView.hpp"
-#include "UniverseModel.hpp"
-#include "UniverseController.hpp"
+#include "window/Window.hpp"
+#include "universe/UniverseView.hpp"
+#include "universe/UniverseModel.hpp"
+#include "universe/UniverseController.hpp"
 
 int main(){
 

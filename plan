@@ -35,3 +35,4 @@ TODOS - next tasks:
 TODO - side quests, good ideas:
 - GSLwrapper
 - inspect (remove?) usleep in main
+- objects are connected through references - good for now, but if swapping occures than a refactoring will be needed
