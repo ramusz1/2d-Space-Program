@@ -10,12 +10,13 @@
 class UniverseController : public WindowEventHandler
 {
 public:
-    UniverseController(const UniverseModel& universeModel);
+    UniverseController(UniverseModel& universeModel);
     void eventHandler(int key, int scancode, int action, int mods) override;
     bool isGameRunning();
     void quit();
+    void liftoff();
 
 private:
     bool isGameRunningFlag = true;
-    const UniverseModel& universeModel;
+    UniverseModel& universeModel;
 };

@@ -2,15 +2,25 @@
 
 #include <memory>
 
-#include "models/Drawable.hpp"
+#include "shapes/Drawable.hpp"
+#include "physics/PhysicalObject.hpp"
+#include "physics/PhysicsEngine.hpp"
+#include "objects/Rocket.hpp"
 
 using namespace std;
 
 class UniverseModel{
 private:
-    vector< unique_ptr<Drawable> > worldObjects;
+    vector< shared_ptr<PhysicalObject> > worldObjects;
+    shared_ptr<Rocket> rocket;
+
+    PhysicsEngine physicsEngine;
 
 public:
     UniverseModel();
-    const vector<unique_ptr<Drawable> >& getWorldObjects() const;
+    const vector<shared_ptr<Drawable> > getDrawables() const;
+    shared_ptr<Rocket> getRocket();
+
+    void update();
+
 };

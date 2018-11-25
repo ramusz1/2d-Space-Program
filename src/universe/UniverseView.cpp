@@ -1,6 +1,5 @@
 #include "UniverseView.hpp"
-#include "models/Drawable.hpp"
-#include "models/Triangle.hpp"
+#include "shapes/Drawable.hpp"
 
 #include "shaders/ShaderCompiler.hpp"
 
@@ -24,7 +23,7 @@ void UniverseView::render()
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
     glClear( GL_COLOR_BUFFER_BIT );
 
-    auto& drawables = universeModel.getWorldObjects();
+    auto& drawables = universeModel.getDrawables();
 
     for(auto& drawable : drawables)
     {

@@ -20,6 +20,7 @@ int main(){
             universeView.render();
             usleep(10000);
             window.pollEvents();
+            universeModel.update();
         }
     } catch(WindowException &e){
         std::cerr << e.what() << std::endl;
