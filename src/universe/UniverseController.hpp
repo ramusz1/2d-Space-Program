@@ -14,9 +14,12 @@ public:
     void eventHandler(int key, int scancode, int action, int mods) override;
     bool isGameRunning();
     void quit();
-    void liftoff();
+    void rocketMainEngineOn();
+    void rocketMainEngineOff();
 
 private:
     bool isGameRunningFlag = true;
     UniverseModel& universeModel;
+    void handleKeyPress(int key);
+    void handleKeyRelease(int key);
 };
