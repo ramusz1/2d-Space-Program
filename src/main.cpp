@@ -1,5 +1,6 @@
 #include <iostream>
-#include <unistd.h> // usleep 
+#include <chrono>
+#include <thread>
 
 #include "window/Window.hpp"
 #include "universe/UniverseView.hpp"
@@ -18,7 +19,7 @@ int main(){
         while(window.isOpen() and universeController.isGameRunning())
         {
             universeView.render();
-            usleep(10000);
+            std::this_thread::sleep_for(std::chrono::milliseconds(30));
             window.pollEvents();
             universeModel.update();
         }

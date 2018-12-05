@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 
 #include "glm/glm.hpp"
 
@@ -21,6 +22,8 @@ class PhysicalObject
     * equations (2-41 to 2-43)
     */
 public:
+
+    std::string debugName;
 
     // basic physical object
 
@@ -48,12 +51,15 @@ public:
     int applyForce(dvec2 force);
     void removeForce(int id);
 
+    void applyTempForce(const glm::dvec2& force);
+    void removeTempForces();
 
     void applyTorque(double torque);
 
+    void applyGravity(dvec2 force);
 
-    PhysicalObject() = default;
-    PhysicalObject(shared_ptr<Shape> shape, double mass);
+    PhysicalObject(std::string);
+    PhysicalObject(std::string, shared_ptr<Shape> shape, double mass);
 
     shared_ptr<Shape> getShape();
 

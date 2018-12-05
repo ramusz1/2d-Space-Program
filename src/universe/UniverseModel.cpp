@@ -1,18 +1,24 @@
 #include <iostream>
 #include <algorithm>
 
+#include "glm/glm.hpp"
+
 #include "UniverseModel.hpp"
 #include "shapes/Triangle.hpp"
 #include "shapes/Square.hpp"
+
+#include "objects/Planet.hpp"
 
 using namespace std;
 
 UniverseModel::UniverseModel():
     physicsEngine(0.1)
 {
-    auto triangle = make_shared<Triangle>(0.5);
-    rocket = make_shared<Rocket>();
+    rocket = make_shared<Rocket>(glm::dvec2(0,0.5));
     worldObjects.push_back(rocket);
+
+    auto planet = make_shared<Planet>(1e8, glm::dvec2(0,0), 0.1);
+    worldObjects.push_back(planet);
     // auto square = make_shared<Square>(0.5);
     // worldObjects.push_back(make_unique<PhysicalObject>(square, 1));
 }
@@ -29,7 +35,6 @@ shared_ptr<Rocket> UniverseModel::getRocket()
 {
     return rocket;
 }
-
 
 void UniverseModel::update()
 {

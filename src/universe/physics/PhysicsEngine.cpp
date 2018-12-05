@@ -1,5 +1,6 @@
 #include "PhysicsEngine.hpp"
 
+#include <iostream>
 
 PhysicsEngine::PhysicsEngine(double deltaTime):
     deltaTime(deltaTime)
@@ -23,32 +24,38 @@ void PhysicsEngine::simulate(std::vector<shared_ptr<PhysicalObject> >& input)
     6. PROFIT
     */
 
-    // gravity situation and forces in general are hopeles
-    // TODO FIX IT ALL
-
     // add gravity
-    dvec2 gravity(0,-0.001f);
-    vector<int> gravityIdentifiers;
-    gravityIdentifiers.reserve(input.size());
-    for(auto& physicalObject : input)
+    for(int i = 0; i < input.size(); ++i)
     {
-        auto id = physicalObject->applyForce(gravity);
-        gravityIdentifiers.push_back(id);
+        for(int j = i + 1; j < input.size(); ++j)
+        {
+            applyGravityToObjects(input[i], input[j]);
+        }
     }
-
+    
+    // update objects
     for(auto& physicalObject : input)
     {
         physicalObject->update(deltaTime);
     }
 
     // remove gravity
-    auto gravityIdIter = gravityIdentifiers.begin();
     for(auto& physicalObject : input)
     {
-        physicalObject->removeForce(*gravityIdIter);
-        ++gravityIdIter;
+        physicalObject->removeTempForces();
     }
 
+}
+
+void PhysicsEngine::applyGravityToObjects(shared_ptr<PhysicalObject>& a, shared_ptr<PhysicalObject>& b)
+{
+    auto differenceInPosition = a->position - b->position;
+    auto distance = glm::length(differenceInPosition);
+    auto forceValue = const_G * a->mass * b->mass / (distance * distance);
+    auto force = forceValue * (differenceInPosition / distance);
+    // std::cerr << forceValue << std::endl;
+    a->applyTempForce(-force);
+    b->applyTempForce(force);
 }
 
 void PhysicsEngine::predictTrajectory()

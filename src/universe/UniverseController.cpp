@@ -20,9 +20,9 @@ void UniverseController::eventHandler(int key, int scancode, int action, int mod
 
 void UniverseController::handleKeyPress(int key)
 {
-    if (key == GLFW_KEY_ESCAPE)
+    if (GLFW_KEY_ESCAPE == key)
         quit();
-    else if (key == GLFW_KEY_SPACE)
+    else if (GLFW_KEY_SPACE == key)
         rocketMainEngineOn();
 }
 
@@ -39,10 +39,8 @@ void UniverseController::rocketMainEngineOn()
 
 void UniverseController::handleKeyRelease(int key)
 {
-    if (key == GLFW_KEY_SPACE){
-        cerr << "RELEASE\n";
+    if (key == GLFW_KEY_SPACE)
         rocketMainEngineOff();
-    }
 }
 
 void UniverseController::rocketMainEngineOff()

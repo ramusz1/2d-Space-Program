@@ -8,7 +8,7 @@ private:
     int mainEngineForceId = -1;
 
 public:
-    Rocket();
+    Rocket(glm::dvec2);
 
     void mainEngineOn();
     void mainEngineOff();

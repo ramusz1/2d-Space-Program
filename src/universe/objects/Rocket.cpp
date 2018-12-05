@@ -6,10 +6,11 @@
 #include "universe/shapes/Triangle.hpp"
 
 
-Rocket::Rocket():
-    PhysicalObject()
+Rocket::Rocket(glm::dvec2 position):
+    PhysicalObject("Rocket")
 {
     double scale = 0.1;
+    this->position = position;
     shape = make_shared<Triangle>(scale);
     mass = 1;
 }
@@ -17,7 +18,7 @@ Rocket::Rocket():
 void Rocket::mainEngineOn()
 {
     glm::vec2 thrustDirection(0, 1);
-    float scalar = 0.002f;
+    float scalar = 0.15f;
     auto force = scalar * thrustDirection;
     mainEngineForceId = applyForce(force);
 }

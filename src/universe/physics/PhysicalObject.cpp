@@ -4,7 +4,14 @@
 
 using namespace std;
 
-PhysicalObject::PhysicalObject(shared_ptr<Shape> shape, double mass):
+PhysicalObject::PhysicalObject(string debugName):
+    debugName(debugName),
+    forceCalculator(debugName)
+{}
+
+PhysicalObject::PhysicalObject(string debugName, shared_ptr<Shape> shape, double mass):
+    debugName(debugName),
+    forceCalculator(debugName),
     shape(shape),
     mass(mass)
 {}
@@ -26,7 +33,6 @@ void PhysicalObject::update(double dt)
     position += dt * velocity;
     orientation += dt * angularVelocity;
     momentum += dt * force;
-    std::cerr << "velocity: " << velocity[0] << ' ' << velocity[1] << std::endl;
     angularMomentum += dt * torque;
 }
 
@@ -44,6 +50,16 @@ int PhysicalObject::applyForce(glm::dvec2 force)
 void PhysicalObject::removeForce(int id)
 {
     forceCalculator.removeForce(id);
+}
+
+void PhysicalObject::applyTempForce(const glm::dvec2& force)
+{
+    forceCalculator.addTempForce(force);
+}
+
+void PhysicalObject::removeTempForces()
+{
+    forceCalculator.removeTempForces();
 }
 
 void PhysicalObject::applyTorque(double torque)
