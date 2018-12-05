@@ -19,8 +19,7 @@ universeModel(universeModel)
 
 void UniverseView::render()
 {
-    // Dark blue background
-    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+    glClearColor(0.0f, 0.0f, 0.1f, 0.0f);
     glClear( GL_COLOR_BUFFER_BIT );
 
     auto& drawables = universeModel.getDrawables();

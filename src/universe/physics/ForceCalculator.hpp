@@ -1,5 +1,6 @@
 #include <set>
 #include <vector>
+#include <cstdlib>
 
 #include "glm/glm.hpp"
 
@@ -17,13 +18,24 @@ private:
     std::string debugName;
 
     std::set< int > identifiers;
-    std::set< std::pair<double, int> > forcesX;
-    std::set< std::pair<double, int> > forcesY;
+
+    struct PairAbsComp
+    {
+        bool operator() (const std::pair<double, int>&, const std::pair<double, int>&) const;
+    };
+
+    std::set< std::pair<double, int>, PairAbsComp> forcesX;
+    std::set< std::pair<double, int>, PairAbsComp> forcesY;
+
+    struct AbsComp
+    {
+        bool operator() (const double& lhs, const double& rhs) const;
+    };
 
     std::vector< double> tempForcesX;
     std::vector< double> tempForcesY;
 
     int getNewId();
     void removeId(int id);
-    double getNetForceInOneDirection(std::set< std::pair<double, int> >&, std::vector<double>&);
+    double getNetForceInOneDirection(std::set< std::pair<double, int>, PairAbsComp>&, std::vector<double>&);
 };

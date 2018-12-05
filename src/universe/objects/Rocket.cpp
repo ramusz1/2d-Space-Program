@@ -9,7 +9,7 @@
 Rocket::Rocket(glm::dvec2 position):
     PhysicalObject("Rocket")
 {
-    double scale = 0.1;
+    double scale = 0.03;
     this->position = position;
     shape = make_shared<Triangle>(scale);
     mass = 1;

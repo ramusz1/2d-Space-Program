@@ -14,7 +14,6 @@ ForceCalculator::ForceCalculator(std::string debugName):
 int ForceCalculator::addForce(const glm::dvec2& force)
 {
     auto id = getNewId();
-    auto lambda = [](auto& a, auto& b){return a.first < b.first;};
     forcesX.insert( std::make_pair(force[0],id));
     forcesY.insert( std::make_pair(force[1],id));
     return id;
@@ -53,9 +52,9 @@ glm::dvec2 ForceCalculator::getNetForce()
     return glm::dvec2(x, y);
 }
 
-double ForceCalculator::getNetForceInOneDirection(std::set< std::pair<double, int> >& forces, std::vector<double>& tempForces)
+double ForceCalculator::getNetForceInOneDirection(std::set< std::pair<double, int>, PairAbsComp>& forces, std::vector<double>& tempForces)
 {
-    std::sort(tempForces.begin(), tempForces.end());
+    std::sort(tempForces.begin(), tempForces.end(), AbsComp());
     SetOfPairsView viewBegin(forces.begin());
     SetOfPairsView viewEnd(forces.end());
     Accumulator output;
@@ -78,4 +77,18 @@ int ForceCalculator::getNewId()
 void ForceCalculator::removeId(int id)
 {
     identifiers.erase(id);
+}
+
+
+
+bool ForceCalculator::PairAbsComp::operator()(
+    const std::pair<double, int>& lhs, const std::pair<double, int>& rhs) const
+{
+    return glm::abs(lhs.first) < glm::abs(rhs.first);
+}
+
+
+bool ForceCalculator::AbsComp::operator()(const double& lhs, const double& rhs) const
+{
+    return glm::abs(lhs) < glm::abs(rhs);
 }
