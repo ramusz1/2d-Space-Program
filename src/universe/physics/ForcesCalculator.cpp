@@ -80,7 +80,6 @@ void ForceCalculator::removeId(int id)
 }
 
 
-
 bool ForceCalculator::PairAbsComp::operator()(
     const std::pair<double, int>& lhs, const std::pair<double, int>& rhs) const
 {

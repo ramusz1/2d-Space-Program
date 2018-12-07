@@ -14,6 +14,6 @@ const vector<vec3> Triangle::triangleVertices = {
         vec3(0,  1, 0),
     };
 
-Triangle::Triangle(const float scale):
-    Shape(GL_TRIANGLES, Triangle::triangleVertices, scale)
+Triangle::Triangle(glm::vec3 color, const float scale):
+    Shape(GL_TRIANGLES, color, Triangle::triangleVertices, scale)
 {}

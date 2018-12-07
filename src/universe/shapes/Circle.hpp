@@ -11,5 +11,5 @@ private:
     static const vector<glm::vec3> baseVertices;
 
 public:
-    Circle(float scale);
+    Circle(glm::vec3 color, const float scale);
 };

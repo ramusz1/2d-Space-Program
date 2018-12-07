@@ -9,7 +9,7 @@
 class Shape : public Drawable
 {
 public:
-    Shape(GLenum mode, std::vector<glm::vec3> vertices, float scale);
+    Shape(GLenum mode, glm::vec3 color, std::vector<glm::vec3> vertices, float scale);
     virtual void setPosition(glm::dvec2);
     virtual void setOrientation(glm::dvec2);
 

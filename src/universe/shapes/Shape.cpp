@@ -8,8 +8,8 @@
 using namespace std;
 using namespace glm;
 
-Shape::Shape(GLenum mode, vector<vec3> vertices, float scale):
-    Drawable(mode),
+Shape::Shape(GLenum mode, glm::vec3 color, vector<vec3> vertices, float scale):
+    Drawable(mode, color),
     baseVertices(vertices),
     position(0.0,0.0)
 {

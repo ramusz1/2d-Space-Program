@@ -50,6 +50,6 @@ const vector<vec3> Circle::baseVertices = {
 
     };
 
-Circle::Circle(const float scale) :
-    Shape(GL_TRIANGLE_FAN, Circle::baseVertices, scale)
+Circle::Circle(glm::vec3 color, const float scale) :
+    Shape(GL_TRIANGLE_FAN, color, Circle::baseVertices, scale)
 {}

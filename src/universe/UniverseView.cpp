@@ -15,12 +15,15 @@ universeModel(universeModel)
     glGenVertexArrays(1, &VertexArrayID);
     glBindVertexArray(VertexArrayID);
     glUseProgram(programId);
+
+    positionLocation = glGetAttribLocation(programId, "aPosition");
+    colorLocation = glGetUniformLocation(programId, "uColor");
 }
 
 void UniverseView::render()
 {
     glClearColor(0.0f, 0.0f, 0.1f, 0.0f);
-    glClear( GL_COLOR_BUFFER_BIT );
+    glClear(GL_COLOR_BUFFER_BIT);
 
     auto& drawables = universeModel.getDrawables();
 
@@ -28,14 +31,15 @@ void UniverseView::render()
     {
         glBindBuffer(GL_ARRAY_BUFFER, drawable->getVertexBuffer());
         glVertexAttribPointer(
-            0,                  // attribute
+            positionLocation,   // attribute
             3,                  // size
             GL_FLOAT,           // type
             GL_FALSE,           // normalized
             0,                  // stride
             (void*)0            // array buffer offset
         );
-        glEnableVertexAttribArray(0);
+        glUniform3fv(colorLocation, 1, drawable->getColor());
+        glEnableVertexAttribArray(positionLocation);
         glDrawArrays(drawable->getMode(), 0, drawable->getVerticesCount());
     }
     window.swapBuffers();

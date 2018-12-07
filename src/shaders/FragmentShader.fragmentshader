@@ -1,9 +1,9 @@
 #version 330 core
 
-// Ouput data
-out vec3 color;
+uniform vec3 uColor;
+out vec3 fragColor;
 
 void main()
 {
-    color = vec3(1,0,0);
+    fragColor = uColor;
 }

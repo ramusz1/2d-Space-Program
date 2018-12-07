@@ -11,7 +11,7 @@ Rocket::Rocket(glm::dvec2 position):
 {
     double scale = 0.03;
     this->position = position;
-    shape = make_shared<Triangle>(scale);
+    shape = make_shared<Triangle>(glm::vec3(1, 1, 1), scale);
     mass = 1;
 }
 
